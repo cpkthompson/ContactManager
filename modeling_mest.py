@@ -1,8 +1,7 @@
 class Person:
-    def __init__(self):
-        self.name = str(input('Enter your name: '))
-        self.nationality = str(input('Enter your nationality: '))
-        
+    def __init__(self, name, nationality):
+        self.name = name
+        self.nationality = nationality
 
 class EITs(Person):
     def __init__(self, name = "Charles", nationality = "Ghanaian"):
@@ -13,10 +12,18 @@ class EITs(Person):
         print(self.fun_fact)
 
 
-class Fellows(Person):
-    def __init__(self, name = "Francis", nationality = "Ghanaian", happiness_level = "0"):
+class Fellow(Person):
+    fellow_instances = 0
+
+    def __init__(self, name, nationality, happiness_level="0"):
         super().__init__(name, nationality)
         self.happiness_level = happiness_level
+        Fellow.fellow_instances += 1
+
+        if Fellow.fellow_instances > 5:
+            new_fellow_instance = self.name
+            raise ValueError ("We cannot afford to hire {}".format(new_fellow_instance))
+    
 
     def eat(self):
         self.happiness_level = self.happiness_level + 1
@@ -46,6 +53,10 @@ class School:
 
     
 if __name__ == '__main__':
-    start_school = School()
-    
-    start_school.recruit()
+    Fellow("Pascal", "DRC")
+    Fellow("Andrew", "USA")
+    Fellow("Miishe", "GH/Murika")
+    Fellow("Simphiwe", "Africa del Sur")
+    Fellow("Edem", "GH")
+    Fellow("Charles", "GH")
+    Fellow("Francis", "GH")
